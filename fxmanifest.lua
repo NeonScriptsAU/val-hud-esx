@@ -6,6 +6,7 @@ client_script 'cl_main.lua'
 server_script 'server.lua'
 
 shared_script {
+    '@ox_lib/init.lua',
     'config.lua'
 }
 
