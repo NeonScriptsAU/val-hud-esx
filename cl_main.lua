@@ -17,9 +17,19 @@ CreateThread(function()
     end
 end)
 
--- Event handlers for updating needs and seatbelt status
-RegisterNetEvent('hud:client:UpdateNeeds', function(newHunger, newThirst)
-    hunger, thirst = newHunger, newThirst
+CreateThread(function()
+    while true do
+        if isLoggedIn then
+            TriggerEvent("esx_status:getStatus", "hunger", function(status)
+                hunger = math.floor(status.getPercent())
+            end)
+
+            TriggerEvent("esx_status:getStatus", "thirst", function(status)
+                thirst = math.floor(status.getPercent())
+            end)
+        end
+        Wait(5000)
+    end
 end)
 
 RegisterNetEvent('hud:client:UpdateStress', function(newStress)
