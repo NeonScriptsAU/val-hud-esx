@@ -1,13 +1,16 @@
 fx_version 'cerulean'
 game 'gta5'
 
-client_script 'cl_main.lua'
+client_scripts {
+    'cl_main.lua',
+    'cl_seatbelt.lua'
+}
 
 server_script 'server.lua'
 
 shared_script {
-    '@ox_lib/init.lua',
-    'config.lua'
+    'config.lua',
+    '@ox_lib/init.lua'
 }
 
 ui_page 'nui/ui.html'

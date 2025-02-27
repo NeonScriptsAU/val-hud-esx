@@ -52,7 +52,6 @@ const updateSpeed = speed => {
 const toggleHUDVisibility = inVehicle => {
     document.getElementById('veh-hud').style.display = inVehicle ? 'flex' : 'none';
     document.getElementById('hud').style.left = inVehicle ? '19%' : '2%';
-    document.getElementById('money-hud').style.left = inVehicle ? '19%' : '2%';
 };
 
 window.addEventListener('message', event => {
@@ -65,17 +64,14 @@ window.addEventListener('message', event => {
             updateProgress('oxygen-path', data.oxygen);
             updateBar('health-bar', 'health-text', data.health);
             updateBar('armor-bar', 'armor-text', data.armor);
-            document.getElementById('cash-text').innerText = `$${data.cash}`;
-            document.getElementById('bank-text').innerText = `$${data.bank}`;
             toggleHUDVisibility(data.inVehicle);
-            // Ensure speed is rounded to whole numbers
             document.getElementById('speed-text').innerText = `${Math.floor(data.speed)}`;
             document.getElementById('rpm-bar').querySelector('.veh-progress-inner').style.width = `${Math.min(data.rpm, 100)}%`;
             const petrolBar = document.getElementById('petrol-bar');
-            if (petrolBar) {
+            if (petrolBar && typeof data.fuel === "number") {
                 petrolBar.querySelector('.veh-progress-inner').style.width = `${Math.min(data.fuel, 100)}%`;
                 document.getElementById('petrol-text').innerText = `${data.fuel.toFixed(0)}%`;
-            }
+            }            
             updateSeatbelt(data.belt);
             updateEngine(data.engine);
             break;
